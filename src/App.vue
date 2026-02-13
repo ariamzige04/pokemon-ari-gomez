@@ -66,7 +66,7 @@ function abrirDesdeTarjeta(nombre) {
             <span v-if="p.cargandoLista.value" class="inline-flex items-center gap-2">
               <span class="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black"></span>
               Cargando lista…
-              </span>
+            </span>
             <span v-else> Página {{ p.pagina.value }} de {{ p.totalPaginas.value }} </span>
           </div>
 
@@ -97,6 +97,14 @@ function abrirDesdeTarjeta(nombre) {
           class="mt-4 rounded-2xl bg-red-100 p-3 text-sm font-semibold text-red-800 ring-1 ring-red-200"
         >
           {{ p.error.value }}
+        </div>
+
+        <!-- Mensaje vacio para busqueda sin resultados (404) -->
+        <div
+          v-if="p.mensajeVacio && p.mensajeVacio.value"
+          class="mt-4 rounded-2xl bg-yellow-100 p-3 text-sm font-semibold text-yellow-900 ring-1 ring-yellow-200"
+        >
+          {{ p.mensajeVacio.value }}
         </div>
       </div>
     </header>
@@ -133,14 +141,13 @@ function abrirDesdeTarjeta(nombre) {
         </button>
       </div>
 
-      <!-- Estado vacio: no hay resultados en la pagina actual -->
-      <div
-        v-if="p.mensajeVacio.value"
-        class="mt-4 rounded-2xl bg-yellow-100 p-3 text-sm font-semibold text-yellow-900 ring-1 ring-yellow-200"
+      <!-- Estado vacio de la lista -->
+      <p
+        v-if="!p.cargandoLista.value && p.items.value.length === 0"
+        class="mt-6 text-center text-sm font-semibold text-white/90"
       >
-        {{ p.mensajeVacio.value }}
-      </div>
-
+        No hay resultados.
+      </p>
     </main>
 
     <!-- Modal controlado por pokemonSeleccionado (se cierra con update:modelValue) -->
