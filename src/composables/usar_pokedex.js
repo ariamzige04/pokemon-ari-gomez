@@ -20,6 +20,9 @@ export function usarPokedex() {
   // Mensaje para validar el input de busqueda (cuando esta vacio)
   const errorBusqueda = ref("");
 
+  // Timer para limpiar el error de busqueda sin acumular timeouts
+  let timerErrorBusqueda = null;
+
   // Datos principales del listado
   const items = ref([]);
   const total = ref(0);
@@ -42,6 +45,8 @@ export function usarPokedex() {
   watch(busqueda, (val) => {
     if (String(val || "").trim().length > 0) {
       errorBusqueda.value = "";
+      clearTimeout(timerErrorBusqueda);
+      timerErrorBusqueda = null;
     }
   });
 
@@ -125,14 +130,23 @@ export function usarPokedex() {
   async function buscarPokemon() {
     const q = busqueda.value.trim().toLowerCase();
 
-    // Validacion: si esta vacio mostramos alerta
+    // Validacion: si esta vacio mostramos alerta y la quitamos despues de 5s
     if (!q) {
       errorBusqueda.value = "Escribe un nombre o ID para buscar.";
+
+      clearTimeout(timerErrorBusqueda);
+      timerErrorBusqueda = setTimeout(() => {
+        errorBusqueda.value = "";
+        timerErrorBusqueda = null;
+      }, 5000);
+
       return;
     }
 
     // Si ya hay texto, limpiamos la alerta
     errorBusqueda.value = "";
+    clearTimeout(timerErrorBusqueda);
+    timerErrorBusqueda = null;
 
     await abrirPokemon(q);
   }
