@@ -63,7 +63,10 @@ function abrirDesdeTarjeta(nombre) {
         <!-- Paginacion superior y numero de pagina -->
         <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div class="text-sm font-semibold text-black/70">
-            <span v-if="p.cargandoLista.value">Cargando lista…</span>
+            <span v-if="p.cargandoLista.value" class="inline-flex items-center gap-2">
+              <span class="h-4 w-4 animate-spin rounded-full border-2 border-black/30 border-t-black"></span>
+              Cargando lista…
+              </span>
             <span v-else> Página {{ p.pagina.value }} de {{ p.totalPaginas.value }} </span>
           </div>
 
