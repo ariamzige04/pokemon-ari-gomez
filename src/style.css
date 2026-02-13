@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colores estilo Pokemon */
+  --color-pokemon-amarillo: #ffcb05;
+  --color-pokemon-azul: #2a75bb;
+  --color-pokemon-azul-oscuro: #3b4cca;
+  --color-pokemon-rojo: #cc0000;
+
+  /* Tipografias */
+  --font-pokemon: "Bangers", system-ui, sans-serif;
+  --font-base: "Fredoka", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-base);
+  }
+}
+
+button {
+  cursor: pointer;
+}
