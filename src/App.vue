@@ -134,12 +134,13 @@ function abrirDesdeTarjeta(nombre) {
       </div>
 
       <!-- Estado vacio: no hay resultados en la pagina actual -->
-      <p
-        v-if="!p.cargandoLista.value && p.items.value.length === 0"
-        class="mt-6 text-center text-sm font-semibold text-black/60"
+      <div
+        v-if="p.mensajeVacio.value"
+        class="mt-4 rounded-2xl bg-yellow-100 p-3 text-sm font-semibold text-yellow-900 ring-1 ring-yellow-200"
       >
-        No hay resultados.
-      </p>
+        {{ p.mensajeVacio.value }}
+      </div>
+
     </main>
 
     <!-- Modal controlado por pokemonSeleccionado (se cierra con update:modelValue) -->
