@@ -60,6 +60,13 @@ function abrirDesdeTarjeta(nombre) {
           </div>
         </div>
 
+        <div
+          v-if="p.errorBusqueda && p.errorBusqueda.value"
+          class="mt-2 rounded-2xl bg-red-100 px-4 py-2 text-sm font-semibold text-red-800 ring-1 ring-red-200"
+        >
+          {{ p.errorBusqueda.value }}
+        </div>
+
         <!-- Paginacion superior y numero de pagina -->
         <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div class="text-sm font-semibold text-black/70">
