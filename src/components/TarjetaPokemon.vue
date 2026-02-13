@@ -43,7 +43,7 @@ function obtenerSpriteDesdeUrl(url = "") {
       <img
         :src="obtenerSpriteDesdeUrl(props.item.url)"
         :alt="props.item.name"
-        class="h-12 w-12"
+        class="h-12 w-12 rounded-xl bg-black/5 p-1"
         loading="lazy"
       />
 
