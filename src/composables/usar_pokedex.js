@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { listarPokemon, obtenerPokemon } from "../api/api_pokemon";
 
 // Util simple para mostrar nombres bonitos en la UI
@@ -17,6 +17,9 @@ export function usarPokedex() {
   const cargandoDetalle = ref(false);
   const error = ref(null);
 
+  // Mensaje para validar el input de busqueda (cuando esta vacio)
+  const errorBusqueda = ref("");
+
   // Datos principales del listado
   const items = ref([]);
   const total = ref(0);
@@ -34,6 +37,13 @@ export function usarPokedex() {
 
   const pagina = computed(() => Math.floor(offset.value / limite.value) + 1);
   const totalPaginas = computed(() => Math.max(1, Math.ceil(total.value / limite.value)));
+
+  // Limpia el mensaje cuando el usuario empieza a escribir
+  watch(busqueda, (val) => {
+    if (String(val || "").trim().length > 0) {
+      errorBusqueda.value = "";
+    }
+  });
 
   // Carga la lista paginada (usa abort para evitar respuestas viejas)
   async function cargarLista() {
@@ -114,7 +124,16 @@ export function usarPokedex() {
   // Busca y abre un pokemon usando el texto del input
   async function buscarPokemon() {
     const q = busqueda.value.trim().toLowerCase();
-    if (!q) return;
+
+    // Validacion: si esta vacio mostramos alerta
+    if (!q) {
+      errorBusqueda.value = "Escribe un nombre o ID para buscar.";
+      return;
+    }
+
+    // Si ya hay texto, limpiamos la alerta
+    errorBusqueda.value = "";
+
     await abrirPokemon(q);
   }
 
@@ -136,6 +155,7 @@ export function usarPokedex() {
     cargandoLista,
     cargandoDetalle,
     error,
+    errorBusqueda,
 
     // acciones
     cargarLista,
