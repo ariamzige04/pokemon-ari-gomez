@@ -7,7 +7,10 @@ async function pedirJSON(ruta, signal) {
   // Si la respuesta falla, intentamos leer el texto para dar un error mas claro
   if (!respuesta.ok) {
     const texto = await respuesta.text().catch(() => "");
-    throw new Error(`Error ${respuesta.status}: ${texto || respuesta.statusText}`);
+    // Guardamos el status para manejar 404 de forma mas clara en la UI
+    const err = new Error(`Error ${respuesta.status}: ${texto || respuesta.statusText}`);
+    err.status = respuesta.status;
+    throw err;
   }
 
   return respuesta.json();
