@@ -25,8 +25,8 @@ function abrirDesdeTarjeta(nombre) {
   <div class="min-h-screen" style="background:#3763AD;">
     <header class="mx-auto max-w-6xl px-4 pt-6">
       <div class="rounded-3xl bg-white/95 p-4 shadow-xl ring-1 ring-black/10">
-        <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div class="flex items-center gap-4">
+        <div class="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+          <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
             <img
               class="h-12 w-auto"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png"
@@ -43,10 +43,10 @@ function abrirDesdeTarjeta(nombre) {
           </div>
 
           <!-- Busqueda: enter o boton para abrir el pokemon por nombre o id -->
-          <div class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+          <div class="flex w-full flex-col gap-2 md:w-auto md:flex-row">
             <input
               v-model="p.busqueda.value"
-              class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm outline-none focus:border-pokemon-amarillo focus:ring-4 focus:ring-pokemon-amarillo/30 sm:w-80"
+              class="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm outline-none focus:border-pokemon-amarillo focus:ring-4 focus:ring-pokemon-amarillo/30 md:w-80"
               placeholder="Buscar por nombre o ID (ej. pikachu o 25)"
               @keydown.enter="p.buscarPokemon"
             />
