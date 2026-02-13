@@ -14,6 +14,14 @@ function obtenerIdDesdeUrl(url = "") {
   const partes = String(url).split("/").filter(Boolean);
   return partes[partes.length - 1] || "";
 }
+
+// Genera la url del sprite usando el id extraido de la URL de la API
+function obtenerSpriteDesdeUrl(url = "") {
+  const id = obtenerIdDesdeUrl(url);
+  return id
+    ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    : "";
+}
 </script>
 
 <template>
@@ -31,8 +39,17 @@ function obtenerIdDesdeUrl(url = "") {
       <span class="text-xs text-black/50 group-hover:text-black/70">Ver detalle</span>
     </div>
 
-    <div class="mt-3 text-lg font-bold text-black">
-      {{ capitalizar(props.item.name) }}
+    <div class="mt-3 flex items-center gap-3">
+      <img
+        :src="obtenerSpriteDesdeUrl(props.item.url)"
+        :alt="props.item.name"
+        class="h-12 w-12"
+        loading="lazy"
+      />
+
+      <div class="text-lg font-bold text-black">
+        {{ capitalizar(props.item.name) }}
+      </div>
     </div>
 
     <div class="mt-1 text-sm text-black/60">
