@@ -3,6 +3,7 @@ import { computed, onMounted } from "vue";
 import { usarPokedex, capitalizar } from "./composables/usar_pokedex";
 import TarjetaPokemon from "./components/TarjetaPokemon.vue";
 import ModalPokemon from "./components/ModalPokemon.vue";
+import logoPokemon from "./assets/pokemon-logo.png";
 
 // Estado principal de la app (lista, paginacion, busqueda y pokemon seleccionado)
 const p = usarPokedex();
@@ -29,7 +30,7 @@ function abrirDesdeTarjeta(nombre) {
           <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
             <img
               class="h-12 w-auto"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1920px-International_Pok%C3%A9mon_logo.svg.png"
+              :src="logoPokemon"
               alt="Pokémon"
             />
             <div>
